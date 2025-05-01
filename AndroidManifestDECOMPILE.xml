@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This is a modified version of AXMLPrinter2(By Google) library. Check out how many changes are made at https://github.com/developer-krushna/AXMLPrinter by (@developer-krushna) -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:versionCode="212"
+    android:versionName="2.1.2"
+    package="com.motorola.commandcenter"
+    platformBuildVersionCode="23"
+    platformBuildVersionName="6.0-2704002">
+    <uses-sdk
+        android:minSdkVersion="22"
+        android:targetSdkVersion="23" />
+    <!-- Access precise location -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Allows an app to access approximate location (network-based). -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Have full internet access -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Read calendar events and details -->
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <!-- Set alarm reminders. -->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <!-- Control vibration -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.motorola.permission.ACCESS_CHECKIN" />
+    <uses-permission android:name="com.motorola.unity.permission.READ_FAMILY_STATUS" />
+    <application
+        android:label="@7f06001b"
+        android:icon="@7f020091"
+        android:allowBackup="true">
+        <receiver
+            android:name="com.motorola.commandcenter.CmdCenterProvider">
+            <intent-filter>
+                <action
+                    android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@7f050001" />
+        </receiver>
+        <service
+            android:name="com.motorola.commandcenter.Cc2WidgetUpdater"
+            android:exported="false" />
+        <service
+            android:name="com.motorola.commandcenter.CmdCenterService"
+            android:exported="false" />
+        <service
+            android:name="com.motorola.commandcenter.MetricsIntentService"
+            android:exported="false" />
+        <provider
+            android:name="com.motorola.commandcenter.weather.provider.WeatherProvider"
+            android:exported="false"
+            android:authorities="com.motorola.commandcenter.weather" />
+        <service
+            android:name="com.motorola.commandcenter.weather.WeatherService"
+            android:exported="false">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.EDIT" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:mimeType="vnd.android.cursor.dir/vnd.motorola.commandcenter.weather.forecast" />
+            </intent-filter>
+        </service>
+        <receiver
+            android:name="com.motorola.commandcenter.weather.WeatherServiceReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action
+                    android:name="com.motorola.commandcenter.weather.action.START_WEATHER_SERVICE" />
+                <action
+                    android:name="com.motorola.commandcenter.weather.action.STOP_WEATHER_SERVICE" />
+                <action
+                    android:name="com.motorola.commandcenter.weather.UPDATE_CURRENT_LOCATION_FORECAST" />
+                <action
+                    android:name="com.motorola.commandcenter.weather.UPDATE_STALE_FORECASTS" />
+                <action
+                    android:name="com.motorola.commandcenter.weather.UPDATE_TOP_FORECASTS" />
+                <action
+                    android:name="com.motorola.commandcenter.weather.UPDATE_TOP_CITY_FORECAST" />
+                <action
+                    android:name="com.motorola.commandcenter.weather.LOCATION_UPDATE_AVAILABLE" />
+                <action
+                    android:name="com.motorola.commandcenter.weather.START_LOCATION_REQUEST_TIMER" />
+            </intent-filter>
+        </receiver>
+        <activity
+            android:theme="@7f0a011b"
+            android:name="com.motorola.commandcenter.weather.WeatherActivity"
+            android:exported="false"
+            android:clearTaskOnLaunch="true"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:configChanges="screenSize|keyboardHidden">
+            <intent-filter>
+                <action
+                    android:name="com.motorola.commandcenter.action.START_WEATHER_APPLICATION" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:theme="@android:style/Theme.Material.Light.DarkActionBar"
+            android:label="@7f06006d"
+            android:name="com.motorola.commandcenter.weather.settings.WeatherSettingsActivity"
+            android:exported="false"
+            android:finishOnTaskLaunch="true"
+            android:excludeFromRecents="true"
+            android:launchMode="standard"
+            android:configChanges="screenSize|orientation|keyboardHidden">
+            <intent-filter>
+                <action
+                    android:name="com.motorola.commandcenter.weather.action.START_WEATHER_SETTINGS" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.EDIT" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="widget" />
+                <data
+                    android:host="com.motorola.commandcenter.weather" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.EDIT" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:mimeType="vnd.android.cursor.dir/vnd.motorola.commandcenter.weather.forecast" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:theme="@android:style/Theme.Material.Light.DarkActionBar"
+            android:label="@7f060019"
+            android:name="com.motorola.commandcenter.weather.settings.AddLocationActivity"
+            android:exported="false"
+            android:finishOnTaskLaunch="true"
+            android:excludeFromRecents="true"
+            android:launchMode="standard"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:windowSoftInputMode="stateVisible">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.INSERT" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:mimeType="vnd.android.cursor.dir/vnd.motorola.commandcenter.weather.forecast" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:theme="@7f0a0087"
+            android:name="com.motorola.commandcenter.AccentSettingsDialogAcitivity"
+            android:taskAffinity="com.commandcenter.setting"
+            android:finishOnTaskLaunch="true"
+            android:excludeFromRecents="true"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:configChanges="screenSize|orientation|keyboardHidden">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MAIN" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:name="com.motorola.commandcenter.weather.RefreshHelpOverlayActivity"
+            android:exported="false"
+            android:clearTaskOnLaunch="true"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:configChanges="screenSize|keyboardHidden">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MAIN" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
